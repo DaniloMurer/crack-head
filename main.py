@@ -7,12 +7,14 @@ import socket
 
 parser = argparse.ArgumentParser(description='Crack Head Hacking Tool')
 
+
 def __register_arguments():
     parser.add_argument('-pS', '--port-scan', help='Port scan with target host')
     parser.add_argument('-e', '--export', help='Export result as Excel')
     parser.add_argument('-fS', '--full-scan', help='Execute full scan of target')
     parser.add_argument('-sBF', '--ssh-brute-force', help='Start SSH Brute Force attack')
     parser.add_argument('-uPwL', '--use-password-list', help='User Password list for Brute Force attacks')
+
 
 def __parse_arguments():
     return parser.parse_args()
@@ -50,7 +52,7 @@ if __name__ == '__main__':
                 sock.connect((args.full_scan, item[0]))
                 sock.send(b'GET HTTP/1.1 \r\n')
                 response = sock.recv(1024)
-                name.append(response)
+                name.append(str(response).strip())
             except Exception as e:
                 name.append('NaN')
             ports.append(item[0])
@@ -61,11 +63,10 @@ if __name__ == '__main__':
 
     if args.ssh_brute_force:
         if args.use_password_list:
-            # TODO: Implement SSH Brute Force by using
-            pass
+            with open(args.use_password_list, 'r') as f:
+                passwords = f.readlines()
+                ssh_bruteforce.start_attack(host=args.ssh_brute_force, port=22, tries=3, passwords=passwords)
         ssh_bruteforce.start_attack(host=args.ssh_brute_force, port=22, tries=3)
 
     if args.export:
         current_df.to_excel(args.export, index=False, sheet_name='Export')
-
-

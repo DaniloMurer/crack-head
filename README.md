@@ -70,3 +70,8 @@ And if you want to perform a SSH brute force attack, use following command:
 ```shell
 python main.py -sBF example.com
 ```
+
+You can also use a password list for the SSH brute force attack, crack head provides a list from [Pwdb-Public](https://github.com/ignis-sec/Pwdb-Public/blob/master/wordlists/ignis-100K.txt):
+```shell
+python main.py -sBF example.com -uPwL "C:/Path/To/Crack/Head/assets/pwlist.txt"
+```
