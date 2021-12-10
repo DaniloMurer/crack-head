@@ -11,7 +11,7 @@ git clone https://github.com/DaniloMurer/crack-head.git
 ```
 After cloning the repository you can navigate into the created directory.
 
-The next step is to activate the virtual environment, this can be achieved using following command:
+The next step is to activate the virtual environment, this can be achieved using this command:
 ```shell
 # Windows
 venv/Scripts/activate

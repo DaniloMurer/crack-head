@@ -2,3 +2,4 @@ python-nmap
 pandas
 openpyxl
 paramiko
+requests
